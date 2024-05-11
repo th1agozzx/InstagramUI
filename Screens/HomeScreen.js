@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   logo: {
-    height: 60,
+    height: 68,
     width: 220,
     borderRadius: 10,
     backgroundColor: 'black',
