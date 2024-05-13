@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView,TouchableHighlight} from 'react-native'
 import Spacer from '../src/components/Spacer';
+import TouchableButton from '../src/components/TouchableButton';
 
 const MeuPerfil = (props) => {
     return (
@@ -9,8 +10,8 @@ const MeuPerfil = (props) => {
             style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginTop: 20,
-                marginLeft: 15,
+                marginTop: 15,
+                marginLeft: 10,
             }}>
                 <Image 
                 style={{
@@ -20,28 +21,75 @@ const MeuPerfil = (props) => {
                     borderRadius:50,
                 }}
                 source={require('../assets/image/Logo1.png')} />
+            <View style={{marginLeft: 10,}}>
+            <Text style={{ 
+                fontWeight: 'bold',
+                fontSize: 18,
+                color: 'black', paddingHorizontal: 25,
+                marginLeft: 10,}}>0</Text>
+        
+            <Text style={{
+                fontWeight: 'bold',
+                fontSize: 16, 
+                color: 'grey', 
+                paddingHorizontal: 10,}}>publicações</Text>
             </View>
+
             <View>
-                <Text>Teste</Text>
-                <Text>Post</Text>
+            <Text style={{ 
+                fontWeight: 'bold',
+                fontSize: 18,
+                color: 'black', paddingHorizontal: 25,
+                marginLeft: 10,}}>77</Text>
+        
+            <Text style={{
+                fontWeight: 'bold',
+                fontSize: 16, 
+                color: 'grey', 
+                paddingHorizontal: 10,}}>seguidores</Text>
             </View>
-            <View styles={styles.container}>
+
+            <View>
+            <Text style={{ 
+                fontWeight: 'bold',
+                fontSize: 18,
+                color: 'black', paddingHorizontal: 25,
+                marginLeft: 10,}}>75</Text>
+        
+            <Text style={{
+                fontWeight: 'bold',
+                fontSize: 16, 
+                color: 'grey', 
+                paddingHorizontal: 10,
+                marginTop: -1,
+                }}>seguindo</Text>
+            </View>
+            </View>
+
+            <Text style={{fontSize: 18, 
+            color: 'black', 
+            paddingHorizontal: 10, 
+            marginTop: 4,
+            fontWeight: 'bold', 
+            marginBottom: 5,
+            }}>Usuário</Text>
+            <TouchableButton title={'Editar Perfil'} textStyle={{color: 'black'}}></TouchableButton>
+
+        <View styles={styles.container}>
         <Spacer height={10}/>
         <ScrollView>
         <Spacer height={10}/>
 
         <TouchableOpacity style={styles.ListItem} onPress={() => props.navigation.replace('Login')}>
             <View style={styles.listItemInnerContentView}>
-
             <Text style={styles.TextStyles}>Sair</Text>
-
             </View>
             </TouchableOpacity>
         </ScrollView>
     </View>
     </View>
-    )
-}
+    );
+};
 
 export default MeuPerfil
 
