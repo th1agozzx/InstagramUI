@@ -1,24 +1,45 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 
+const authenticate = async (email, password) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (email === 'usuario' && password === '123') {
+        resolve('Success');
+      } else {
+        reject('Invalid credentials');
+      }
+    }, 1000);
+  });
+};
+
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
-    // Implemente aqui a lógica de autenticação
-    // Exemplo: verificar credenciais e navegar para a próxima tela se o login for bem-sucedido
-    navigation.navigate('Home');
+  const handleLogin = async () => {
+    setLoading(true);
+    try {
+      await authenticate(email, password);
+      navigation.navigate('Home');
+    } catch (error) {
+      Alert.alert('Login Failed', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.logo}>Login</Text>
+      <Text style={styles.logo}>Acesse</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
       />
       <TextInput
         style={styles.input}
@@ -26,8 +47,11 @@ export default function LoginScreen({ navigation }) {
         secureTextEntry
         value={password}
         onChangeText={setPassword}
+        autoCapitalize="none"
       />
-      <Button title="Login" onPress={handleLogin} />
+      <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
+        <Text style={styles.buttonText}>{loading ? 'Logging in...' : 'Login'}</Text>
+      </TouchableOpacity>
     </View>
   );
 }
