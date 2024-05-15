@@ -112,18 +112,17 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Image 
+      <ScrollView style={styles.feed}>
+      <Image 
           style={styles.logo}
           source={require('../assets/image/LogoInstagram.png')}
         />
-      </View>
-      <ScrollView style={styles.feed}>
         <FlatList
           data={posts}
           renderItem={renderItem}
           keyExtractor={item => item.id}
-        />
+          />
+        
       </ScrollView>
     </View>
   );
