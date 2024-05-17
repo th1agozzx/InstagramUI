@@ -40,7 +40,7 @@ const MeuPerfil = (props) => {
                 fontWeight: 'bold',
                 fontSize: 18,
                 color: 'black', paddingHorizontal: 25,
-                marginLeft: 10,}}>77</Text>
+                marginLeft: 10,}}>1M</Text>
         
             <Text style={{
                 fontWeight: 'bold',
@@ -54,7 +54,7 @@ const MeuPerfil = (props) => {
                 fontWeight: 'bold',
                 fontSize: 18,
                 color: 'black', paddingHorizontal: 25,
-                marginLeft: 10,}}>75</Text>
+                marginLeft: 10,}}>0</Text>
         
             <Text style={{
                 fontWeight: 'bold',
@@ -73,7 +73,7 @@ const MeuPerfil = (props) => {
             fontWeight: 'bold', 
             marginBottom: 5,
             }}>Usuário</Text>
-            <TouchableButton title={'Editar Perfil'} textStyle={{color: 'black'}}></TouchableButton>
+            <TouchableButton title={'Editar Perfil'} textStyle={{color: 'black'}}/>
 
         <View styles={styles.container}>
         <Spacer height={10}/>
