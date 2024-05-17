@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, TextInput, Keyboard, ScrollView } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons'; 
+import { FontAwesome } from '@expo/vector-icons';
 
+// Dados de posts
 const mockPosts = [
-  { id: '1', author: 'User1', imageUrl: 'https://via.placeholder.com/150', likes: 5, comments: ['Legal!'] },
-  { id: '2', author: 'User2', imageUrl: 'https://via.placeholder.com/150', likes: 10, comments: ['Gostei!'] },
-  { id: '3', author: 'User3', imageUrl: 'https://via.placeholder.com/150', likes: 15, comments: ['Maravilhoso!'] },
+  { id: '1', author: 'User1', imageUrl: 'https://via.placeholder.com/150', likes: 5, comments: ['Legal!'], liked: false },
+  { id: '2', author: 'User2', imageUrl: 'https://via.placeholder.com/150', likes: 10, comments: ['Gostei!'], liked: false },
+  { id: '3', author: 'User3', imageUrl: 'https://via.placeholder.com/150', likes: 15, comments: ['Maravilhoso!'], liked: false },
 ];
 
 export default function HomeScreen() {
@@ -15,30 +16,35 @@ export default function HomeScreen() {
   const [activePostId, setActivePostId] = useState(null);
   const [expandedComments, setExpandedComments] = useState([]);
 
+  // Inicializa os posts com os dados
   useEffect(() => {
     setPosts(mockPosts);
   }, []);
 
+  // Monitora a visibilidade do teclado
   useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => setKeyboardVisible(true));
-    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => setKeyboardVisible(false));
+    const showListener = Keyboard.addListener('keyboardDidShow', () => setKeyboardVisible(true));
+    const hideListener = Keyboard.addListener('keyboardDidHide', () => setKeyboardVisible(false));
 
     return () => {
-      keyboardDidShowListener.remove();
-      keyboardDidHideListener.remove();
+      showListener.remove();
+      hideListener.remove();
     };
   }, []);
 
+  // Função para curtir/descurtir
   const handleLike = (postId) => {
     const updatedPosts = posts.map(post => {
       if (post.id === postId) {
-        return { ...post, likes: post.likes + 1 };
+        const updatedLikes = post.liked ? post.likes - 1 : post.likes + 1;
+        return { ...post, likes: updatedLikes, liked: !post.liked };
       }
       return post;
     });
     setPosts(updatedPosts);
   };
 
+  // Função para adicionar um comentário
   const handleComment = () => {
     if (!commentText.trim()) return;
 
@@ -54,6 +60,7 @@ export default function HomeScreen() {
     Keyboard.dismiss();
   };
 
+  // Alterna a visualização dos comentários
   const toggleComments = (postId) => {
     if (expandedComments.includes(postId)) {
       setExpandedComments(expandedComments.filter(id => id !== postId));
@@ -62,12 +69,14 @@ export default function HomeScreen() {
     }
   };
 
+  // Função para lidar com a submissão do campo de texto
   const handleTextInputSubmit = () => {
     if (!commentText.trim()) return;
 
     handleComment();
   };
 
+  // Renderização FlatList
   const renderItem = ({ item }) => (
     <View style={styles.post}>
       <View style={styles.postHeader}>
@@ -78,7 +87,7 @@ export default function HomeScreen() {
       <Image source={{ uri: item.imageUrl }} style={styles.postImage} />
       <View style={styles.actions}>
         <TouchableOpacity onPress={() => handleLike(item.id)}>
-          <FontAwesome name="heart" size={24} color="black" style={styles.icon} />
+          <FontAwesome name="heart" size={24} color={item.liked ? "red" : "black"} style={styles.icon} />
         </TouchableOpacity>
         <Text>{item.likes}</Text>
         <TouchableOpacity onPress={() => setActivePostId(item.id)}>
@@ -113,40 +122,20 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.feed}>
-      <Image 
-          style={styles.logo}
-          source={require('../assets/image/LogoInstagram.png')}
-        />
         <FlatList
           data={posts}
           renderItem={renderItem}
           keyExtractor={item => item.id}
-          />
-        
+        />
       </ScrollView>
     </View>
   );
 }
 
+// Estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  header: {
-    height: 100,
-    backgroundColor: 'transparent',
-    justifyContent: 'center',
-    alignItems: 'center',
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 1,
-  },
-  logo: {
-    height: 68,
-    width: 220,
-    borderRadius: 10,
-    backgroundColor: 'black',
   },
   feed: {
     flex: 1,
@@ -203,12 +192,5 @@ const styles = StyleSheet.create({
   },
   comment: {
     marginBottom: 5,
-  },
-  bottomBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    borderTopWidth: 1,
-    borderTopColor: '#ccc',
-    paddingVertical: 5,
   },
 });

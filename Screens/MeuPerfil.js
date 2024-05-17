@@ -1,122 +1,111 @@
-import React from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView,TouchableHighlight} from 'react-native'
+import React from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import Spacer from '../src/components/Spacer';
 import TouchableButton from '../src/components/TouchableButton';
 
 const MeuPerfil = (props) => {
     return (
         <View>
-            <View 
-            style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                marginTop: 15,
-                marginLeft: 10,
-            }}>
+            <View style={styles.headerContainer}>
                 <Image 
-                style={{
-                    height: 60,
-                    width: 60,
-                    backgroundColor: 'grey',
-                    borderRadius:50,
-                }}
-                source={require('../assets/image/Logo1.png')} />
-            <View style={{marginLeft: 10,}}>
-            <Text style={{ 
-                fontWeight: 'bold',
-                fontSize: 18,
-                color: 'black', paddingHorizontal: 25,
-                marginLeft: 10,}}>0</Text>
-        
-            <Text style={{
-                fontWeight: 'bold',
-                fontSize: 16, 
-                color: 'grey', 
-                paddingHorizontal: 10,}}>publicações</Text>
+                    style={styles.profileImage}
+                    source={require('../assets/image/Logo1.png')} 
+                />
+                <View style={styles.infoContainer}>
+                    <View style={styles.infoBlock}>
+                        <Text style={styles.infoNumber}>0</Text>
+                        <Text style={styles.infoLabel}>publicações</Text>
+                    </View>
+                    <View style={styles.infoBlock}>
+                        <Text style={styles.infoNumber}>1M</Text>
+                        <Text style={styles.infoLabel}>seguidores</Text>
+                    </View>
+                    <View style={styles.infoBlock}>
+                        <Text style={styles.infoNumber}>0</Text>
+                        <Text style={styles.infoLabel}>seguindo</Text>
+                    </View>
+                </View>
             </View>
 
-            <View>
-            <Text style={{ 
-                fontWeight: 'bold',
-                fontSize: 18,
-                color: 'black', paddingHorizontal: 25,
-                marginLeft: 10,}}>1M</Text>
-        
-            <Text style={{
-                fontWeight: 'bold',
-                fontSize: 16, 
-                color: 'grey', 
-                paddingHorizontal: 10,}}>seguidores</Text>
-            </View>
+            <Text style={styles.username}>Usuário</Text>
+            <TouchableButton title={'Editar Perfil'} textStyle={{ color: 'black' }} />
 
-            <View>
-            <Text style={{ 
-                fontWeight: 'bold',
-                fontSize: 18,
-                color: 'black', paddingHorizontal: 25,
-                marginLeft: 10,}}>0</Text>
-        
-            <Text style={{
-                fontWeight: 'bold',
-                fontSize: 16, 
-                color: 'grey', 
-                paddingHorizontal: 10,
-                marginTop: -1,
-                }}>seguindo</Text>
+            <View style={styles.container}>
+                <Spacer height={10} />
+                <ScrollView>
+                    <Spacer height={10} />
+                    <TouchableOpacity style={styles.listItem} onPress={() => props.navigation.replace('Login')}>
+                        <View style={styles.listItemInnerContentView}>
+                            <Text style={styles.textStyles}>Sair</Text>
+                        </View>
+                    </TouchableOpacity>
+                </ScrollView>
             </View>
-            </View>
-
-            <Text style={{fontSize: 18, 
-            color: 'black', 
-            paddingHorizontal: 10, 
-            marginTop: 4,
-            fontWeight: 'bold', 
-            marginBottom: 5,
-            }}>Usuário</Text>
-            <TouchableButton title={'Editar Perfil'} textStyle={{color: 'black'}}/>
-
-        <View styles={styles.container}>
-        <Spacer height={10}/>
-        <ScrollView>
-        <Spacer height={10}/>
-
-        <TouchableOpacity style={styles.ListItem} onPress={() => props.navigation.replace('Login')}>
-            <View style={styles.listItemInnerContentView}>
-            <Text style={styles.TextStyles}>Sair</Text>
-            </View>
-            </TouchableOpacity>
-        </ScrollView>
-    </View>
-    </View>
+        </View>
     );
 };
 
-export default MeuPerfil
+export default MeuPerfil;
 
 const styles = StyleSheet.create({
+    headerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 15,
+        marginLeft: 10,
+    },
+    profileImage: {
+        height: 60,
+        width: 60,
+        backgroundColor: 'grey',
+        borderRadius: 50,
+    },
+    infoContainer: {
+        flexDirection: 'row',
+        marginLeft: 10,
+    },
+    infoBlock: {
+        alignItems: 'center',
+        marginHorizontal: 10,
+    },
+    infoNumber: {
+        fontWeight: 'bold',
+        fontSize: 18,
+        color: 'black',
+    },
+    infoLabel: {
+        fontWeight: 'bold',
+        fontSize: 16,
+        color: 'grey',
+    },
+    username: {
+        fontSize: 18,
+        color: 'black',
+        paddingHorizontal: 10,
+        marginTop: 4,
+        fontWeight: 'bold',
+        marginBottom: 5,
+    },
     container: {
         flex: 1,
-        backgroundColors:'white',
+        backgroundColor: 'white',
         padding: 10,
-},
-    
-    ListItem: {
-        backgroundColor: '#f9f9f9ff',
+    },
+    listItem: {
+        backgroundColor: '#f9f9f9',
         width: '100%',
         height: 50,
         paddingHorizontal: 15,
-},
-    
+        justifyContent: 'center',
+    },
     listItemInnerContentView: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-},
-    
-    TextStyles: {
+    },
+    textStyles: {
         fontSize: 15,
-        color: '#676767ff',
+        color: '#676767',
         fontWeight: '400',
     },
-})
+});
