@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, Keyboard, TextInput, ScrollView } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, Keyboard, TextInput, ScrollView, Dimensions } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { mockPosts, mockUsers } from '../data/mockData';
+
+const screenWidth = Dimensions.get('window').width;
 
 export default function HomeScreen({ navigation }) {
   const [posts, setPosts] = useState([]);
@@ -150,14 +152,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   postImage: {
-    width: '100%',
-    height: 200,
+    width: screenWidth,
+    height: screenWidth, // Mantém a proporção 1:1
   },
   actions: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 15,
-    marginRight: 25,
     alignItems: 'center',
   },
   icon: {
