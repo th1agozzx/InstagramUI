@@ -1,27 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, TextInput, Keyboard, ScrollView } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, Keyboard, TextInput, ScrollView } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { mockPosts, mockUsers } from '../data/mockData';
 
-// Dados de posts
-const mockPosts = [
-  { id: '1', author: 'User1', imageUrl: 'https://th.bing.com/th/id/OIP.VKdiYSnRcOJNgMg3b2iK2gHaE8?rs=1&pid=ImgDetMain', likes: 5, comments: ['Legal!'], liked: false },
-  { id: '2', author: 'User2', imageUrl: 'https://via.placeholder.com/150', likes: 10, comments: ['Gostei!'], liked: false },
-  { id: '3', author: 'User3', imageUrl: 'https://via.placeholder.com/150', likes: 15, comments: ['Maravilhoso!'], liked: false },
-];
-
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [posts, setPosts] = useState([]);
   const [commentText, setCommentText] = useState('');
   const [keyboardVisible, setKeyboardVisible] = useState(false);
   const [activePostId, setActivePostId] = useState(null);
   const [expandedComments, setExpandedComments] = useState([]);
 
-  // Inicializa os posts com os dados
   useEffect(() => {
     setPosts(mockPosts);
   }, []);
 
-  // Monitora a visibilidade do teclado
   useEffect(() => {
     const showListener = Keyboard.addListener('keyboardDidShow', () => setKeyboardVisible(true));
     const hideListener = Keyboard.addListener('keyboardDidHide', () => setKeyboardVisible(false));
@@ -32,7 +24,6 @@ export default function HomeScreen() {
     };
   }, []);
 
-  // Função para curtir/descurtir
   const handleLike = (postId) => {
     const updatedPosts = posts.map(post => {
       if (post.id === postId) {
@@ -44,7 +35,6 @@ export default function HomeScreen() {
     setPosts(updatedPosts);
   };
 
-  // Função para adicionar um comentário
   const handleComment = () => {
     if (!commentText.trim()) return;
 
@@ -60,7 +50,6 @@ export default function HomeScreen() {
     Keyboard.dismiss();
   };
 
-  // Alterna a visualização dos comentários
   const toggleComments = (postId) => {
     if (expandedComments.includes(postId)) {
       setExpandedComments(expandedComments.filter(id => id !== postId));
@@ -69,55 +58,58 @@ export default function HomeScreen() {
     }
   };
 
-  // Função para lidar com a submissão do campo de texto
   const handleTextInputSubmit = () => {
     if (!commentText.trim()) return;
 
     handleComment();
   };
 
-  // Renderização FlatList
-  const renderItem = ({ item }) => (
-    <View style={styles.post}>
-      <View style={styles.postHeader}>
-        <Image source={{ uri: item.imageUrl }} style={styles.avatar} />
-        <Text style={styles.author}>{item.author}</Text>
-      </View>
-      
-      <Image source={{ uri: item.imageUrl }} style={styles.postImage} />
-      <View style={styles.actions}>
-        <TouchableOpacity onPress={() => handleLike(item.id)}>
-          <FontAwesome name="heart" size={24} color={item.liked ? "red" : "black"} style={styles.icon} />
-        </TouchableOpacity>
-        <Text>{item.likes}</Text>
-        <TouchableOpacity onPress={() => setActivePostId(item.id)}>
-          <FontAwesome name="comment" size={24} color="black" style={styles.icon} />
-        </TouchableOpacity>
-        <Text>{item.comments.length}</Text>
-      </View>
-      {activePostId === item.id && (
-        <View style={styles.commentContainer}>
-          <TextInput
-            style={styles.commentInput}
-            placeholder="Adicione um comentário..."
-            value={commentText}
-            onChangeText={setCommentText}
-            onSubmitEditing={handleTextInputSubmit} // Chama a função handleComment quando a tecla Enter é pressionada
-          />
+  const renderItem = ({ item }) => {
+    const user = mockUsers[item.author];
+    return (
+      <View style={styles.post}>
+        <View style={styles.postHeader}>
+          <Image source={user.avatarUrl} style={styles.avatar} />
+          <TouchableOpacity onPress={() => navigation.navigate('UserDetails', { user })}>
+            <Text style={styles.author}>{item.author}</Text>
+          </TouchableOpacity>
         </View>
-      )}
-      <TouchableOpacity onPress={() => toggleComments(item.id)}>
-        <Text style={styles.viewComments}>{expandedComments.includes(item.id) ? 'Comentários' : 'Ver os Comentários'}</Text>
-      </TouchableOpacity>
-      {expandedComments.includes(item.id) && (
-        <View style={styles.commentContainer}>
-          {item.comments.map((comment, index) => (
-            <Text key={index} style={styles.comment}>{comment}</Text>
-          ))}
+
+        <Image source={item.imageUrl} style={styles.postImage} />
+        <View style={styles.actions}>
+          <TouchableOpacity onPress={() => handleLike(item.id)}>
+            <FontAwesome name="heart" size={24} color={item.liked ? 'red' : 'black'} style={styles.icon} />
+          </TouchableOpacity>
+          <Text>{item.likes}</Text>
+          <TouchableOpacity onPress={() => setActivePostId(item.id)}>
+            <FontAwesome name="comment" size={24} color="black" style={styles.icon} />
+          </TouchableOpacity>
+          <Text>{item.comments.length}</Text>
         </View>
-      )}
-    </View>
-  );
+        {activePostId === item.id && (
+          <View style={styles.commentContainer}>
+            <TextInput
+              style={styles.commentInput}
+              placeholder="Adicione um comentário..."
+              value={commentText}
+              onChangeText={setCommentText}
+              onSubmitEditing={handleTextInputSubmit}
+            />
+          </View>
+        )}
+        <TouchableOpacity onPress={() => toggleComments(item.id)}>
+          <Text style={styles.viewComments}>{expandedComments.includes(item.id) ? 'Comentários' : 'Ver os Comentários'}</Text>
+        </TouchableOpacity>
+        {expandedComments.includes(item.id) && (
+          <View style={styles.commentContainer}>
+            {item.comments.map((comment, index) => (
+              <Text key={index} style={styles.comment}>{comment}</Text>
+            ))}
+          </View>
+        )}
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -125,14 +117,13 @@ export default function HomeScreen() {
         <FlatList
           data={posts}
           renderItem={renderItem}
-          keyExtractor={item => item.id}
+          keyExtractor={(item) => item.id}
         />
       </ScrollView>
     </View>
   );
 }
 
-// Estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -177,20 +168,19 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   commentInput: {
-    flex: 1,
+    borderColor: '#ddd',
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 20,
-    paddingHorizontal: 10,
-    marginRight: 10,
+    borderRadius: 5,
+    padding: 10,
+    marginTop: 10,
   },
   viewComments: {
-    color: 'blue',
-    fontWeight: 'bold',
-    marginTop: 5,
-    paddingHorizontal: 10,
+    color: '#888',
+    marginTop: 10,
+    paddingHorizontal: 15,
   },
   comment: {
-    marginBottom: 5,
+    marginTop: 5,
+    paddingHorizontal: 15,
   },
 });

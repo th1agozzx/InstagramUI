@@ -9,7 +9,7 @@ export default function UserDetailsScreen({ route }) {
   return (
     <View style={styles.container}>
       <View style={styles.profileHeader}>
-        <Image source={{ uri: user.avatarUrl }} style={styles.avatar} />
+        <Image source={user.avatarUrl} style={styles.avatar} />
         <View style={styles.userInfo}>
           <Text style={styles.name}>{user.name}</Text>
           <Text style={styles.bio}>{user.bio}</Text>
@@ -19,7 +19,7 @@ export default function UserDetailsScreen({ route }) {
         data={user.posts}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <Image source={{ uri: item.imageUrl }} style={styles.postImage} />
+          <Image source={item.imageUrl} style={styles.postImage} />
         )}
         numColumns={3}
         style={styles.postsContainer}
