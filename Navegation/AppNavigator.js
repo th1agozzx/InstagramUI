@@ -7,6 +7,7 @@ import HomeScreen from '../Screens/HomeScreen';
 import ChatListScreen from '../Screens/ChatListScreen';
 import ChatScreen from '../Screens/ChatScreen';
 import MeuPerfil from '../Screens/MeuPerfil';
+import UserDetailsScreen from '../Screens/UserDetailsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -24,11 +25,12 @@ function HomeTabs() {
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeTabs} />
         <Stack.Screen name="Perfil" component={MeuPerfil} />
         <Stack.Screen name="Conversa" component={ChatScreen} />
+        <Stack.Screen name="UserDetails" component={UserDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
