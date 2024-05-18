@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView} from 'react-native';
 import Spacer from '../src/components/Spacer';
 import TouchableButton from '../src/components/TouchableButton';
 
@@ -29,19 +29,18 @@ const MeuPerfil = (props) => {
 
             <Text style={styles.username}>Usuário</Text>
             <TouchableButton title={'Editar Perfil'} textStyle={{ color: 'black' }} />
-
-            <View style={styles.container}>
-                <Spacer height={10} />
-                <ScrollView>
-                    <Spacer height={10} />
-                    <TouchableOpacity style={styles.listItem} onPress={() => props.navigation.replace('Login')}>
-                        <View style={styles.listItemInnerContentView}>
-                            <Text style={styles.textStyles}>Sair</Text>
-                        </View>
-                    </TouchableOpacity>
-                </ScrollView>
+            <Text
+            style={{
+                fontSize: 18,
+                color: 'black',
+                paddingHorizontal: 10,
+                marginTop: 10,
+                fontWeight: 'bold',
+                marginBottom: 20,
+            }}
+            >Feed</Text>
+            <View style={{borderWidth:StyleSheet.hairlineWidth, borderColor: 'black'}}/>
             </View>
-        </View>
     );
 };
 
@@ -92,20 +91,10 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     listItem: {
-        backgroundColor: '#f9f9f9',
+        backgroundColor: 'bold',
         width: '100%',
-        height: 50,
-        paddingHorizontal: 15,
+        height: 1,
+        paddingHorizontal: 10,
         justifyContent: 'center',
-    },
-    listItemInnerContentView: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    textStyles: {
-        fontSize: 15,
-        color: '#676767',
-        fontWeight: '400',
     },
 });
