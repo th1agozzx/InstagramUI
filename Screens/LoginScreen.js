@@ -9,7 +9,7 @@ const authenticate = async (email, password) => {
       if (email === "usuario@2024" && password === "1234") {
         resolve("Successo");
       } else {
-        reject("Email ou senha invalidos.");
+        reject("Emai ou senha invalidos.");
       }
     }, 1000);
   });
