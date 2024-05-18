@@ -4,7 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 // Dados de posts
 const mockPosts = [
-  { id: '1', author: 'User1', imageUrl: 'https://via.placeholder.com/150', likes: 5, comments: ['Legal!'], liked: false },
+  { id: '1', author: 'User1', imageUrl: 'https://th.bing.com/th/id/OIP.VKdiYSnRcOJNgMg3b2iK2gHaE8?rs=1&pid=ImgDetMain', likes: 5, comments: ['Legal!'], liked: false },
   { id: '2', author: 'User2', imageUrl: 'https://via.placeholder.com/150', likes: 10, comments: ['Gostei!'], liked: false },
   { id: '3', author: 'User3', imageUrl: 'https://via.placeholder.com/150', likes: 15, comments: ['Maravilhoso!'], liked: false },
 ];

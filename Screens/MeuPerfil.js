@@ -28,8 +28,9 @@ const MeuPerfil = (props) => {
                 </View>
             </View>
 
-            <Text style={styles.username}>Usuário</Text>
-            <TouchableButton title={'Editar Perfil'} textStyle={{ color: 'black' }} />
+            <Text style={styles.username}>Robinho</Text>
+            <TouchableButton title={'Editar Perfil'}/>
+            <TouchableButton title={'Compartilhar Perfil'}/>
             <Text
             style={{
                 fontSize: 18,
@@ -38,10 +39,25 @@ const MeuPerfil = (props) => {
                 marginTop: 10,
                 fontWeight: 'bold',
                 marginBottom: 20,
-            }}
-            >Feed</Text>
+            }}>Feed</Text>
             <View style={{borderWidth:StyleSheet.hairlineWidth, borderColor: 'black'}}/>
-            </View>
+
+            {/* Adicionando as fotos abaixo do Feed */}
+            <ScrollView horizontal={true} style={styles.photoContainer}>
+                <Image 
+                    style={styles.headerImage}
+                    source={require('../assets/image/photo1.png')} 
+                />
+                <Image 
+                    style={styles.headerImage}
+                    source={require('../assets/image/photo1.png')} 
+                />
+                <Image 
+                    style={styles.headerImage}
+                    source={require('../assets/image/photo1.png')} 
+                />
+            </ScrollView>
+        </View>
     );
 };
 
@@ -54,10 +70,11 @@ const styles = StyleSheet.create({
         marginTop: 15,
         marginLeft: 10,
     },
-
-    headerImage: {
+    headerImage:{
         width: 120,
         height: 120,
+        marginHorizontal: 5.6,
+        marginTop: 4,
     },
 
     profileImage: {
@@ -92,16 +109,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 5,
     },
-    container: {
-        flex: 1,
-        backgroundColor: 'white',
-        padding: 10,
-    },
-    listItem: {
-        backgroundColor: 'bold',
-        width: '100%',
-        height: 1,
-        paddingHorizontal: 10,
-        justifyContent: 'center',
+    photoContainer: {
+        flexDirection: 'row',
+        marginTop: 10,
+        marginBottom: 20,
     },
 });
