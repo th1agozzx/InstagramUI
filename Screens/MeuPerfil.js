@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView} from 'react-native';
 import Spacer from '../src/components/Spacer';
 import TouchableButton from '../src/components/TouchableButton';
+import { FlatList } from 'react-native-gesture-handler';
 
 const MeuPerfil = (props) => {
     return (
@@ -53,6 +54,12 @@ const styles = StyleSheet.create({
         marginTop: 15,
         marginLeft: 10,
     },
+
+    headerImage: {
+        width: 120,
+        height: 120,
+    },
+
     profileImage: {
         height: 60,
         width: 60,
