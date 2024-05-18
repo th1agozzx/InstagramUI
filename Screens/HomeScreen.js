@@ -1,27 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, TextInput, Keyboard, ScrollView } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { mockPosts, mockUsers } from '../data/mockData'; 
 
-// Dados de posts
-const mockPosts = [
-  { id: '1', author: 'User1', imageUrl: 'https://via.placeholder.com/150', likes: 5, comments: ['Legal!'], liked: false },
-  { id: '2', author: 'User2', imageUrl: 'https://via.placeholder.com/150', likes: 10, comments: ['Gostei!'], liked: false },
-  { id: '3', author: 'User3', imageUrl: 'https://via.placeholder.com/150', likes: 15, comments: ['Maravilhoso!'], liked: false },
-];
-
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [posts, setPosts] = useState([]);
   const [commentText, setCommentText] = useState('');
   const [keyboardVisible, setKeyboardVisible] = useState(false);
   const [activePostId, setActivePostId] = useState(null);
   const [expandedComments, setExpandedComments] = useState([]);
 
-  // Inicializa os posts com os dados
   useEffect(() => {
     setPosts(mockPosts);
   }, []);
 
-  // Monitora a visibilidade do teclado
   useEffect(() => {
     const showListener = Keyboard.addListener('keyboardDidShow', () => setKeyboardVisible(true));
     const hideListener = Keyboard.addListener('keyboardDidHide', () => setKeyboardVisible(false));
@@ -32,7 +24,6 @@ export default function HomeScreen() {
     };
   }, []);
 
-  // Função para curtir/descurtir
   const handleLike = (postId) => {
     const updatedPosts = posts.map(post => {
       if (post.id === postId) {
@@ -44,7 +35,6 @@ export default function HomeScreen() {
     setPosts(updatedPosts);
   };
 
-  // Função para adicionar um comentário
   const handleComment = () => {
     if (!commentText.trim()) return;
 
@@ -60,7 +50,6 @@ export default function HomeScreen() {
     Keyboard.dismiss();
   };
 
-  // Alterna a visualização dos comentários
   const toggleComments = (postId) => {
     if (expandedComments.includes(postId)) {
       setExpandedComments(expandedComments.filter(id => id !== postId));
@@ -69,19 +58,19 @@ export default function HomeScreen() {
     }
   };
 
-  // Função para lidar com a submissão do campo de texto
   const handleTextInputSubmit = () => {
     if (!commentText.trim()) return;
 
     handleComment();
   };
 
-  // Renderização FlatList
   const renderItem = ({ item }) => (
     <View style={styles.post}>
       <View style={styles.postHeader}>
         <Image source={{ uri: item.imageUrl }} style={styles.avatar} />
-        <Text style={styles.author}>{item.author}</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('UserDetails', { user: mockUsers[item.author] })}>
+          <Text style={styles.author}>{item.author}</Text>
+        </TouchableOpacity>
       </View>
       
       <Image source={{ uri: item.imageUrl }} style={styles.postImage} />
@@ -102,7 +91,7 @@ export default function HomeScreen() {
             placeholder="Adicione um comentário..."
             value={commentText}
             onChangeText={setCommentText}
-            onSubmitEditing={handleTextInputSubmit} // Chama a função handleComment quando a tecla Enter é pressionada
+            onSubmitEditing={handleTextInputSubmit}
           />
         </View>
       )}
@@ -132,7 +121,6 @@ export default function HomeScreen() {
   );
 }
 
-// Estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
