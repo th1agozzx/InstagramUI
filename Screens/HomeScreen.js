@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, Keyboard, TextInput, Dimensions } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity, Keyboard, TextInput, Dimensions, FlatList } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { mockPosts, mockUsers } from '../data/mockData';
 
@@ -115,12 +115,16 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={posts}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={styles.feed}
-      />
+      {/* Envolve o conteúdo com um ScrollView */}
+      <ScrollView>
+        <View style={styles.feed}>
+          <FlatList
+            data={posts}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id.toString()}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 }

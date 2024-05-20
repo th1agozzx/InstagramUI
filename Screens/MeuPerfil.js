@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView} from 'react-native';
-import Spacer from '../src/components/Spacer';
+import { StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 import TouchableButton from '../src/components/TouchableButton';
-import { FlatList } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Ionicons'; // Importe o ícone necessário
 
 const MeuPerfil = (props) => {
     return (
@@ -29,17 +28,13 @@ const MeuPerfil = (props) => {
             </View>
 
             <Text style={styles.username}>Robinho</Text>
-            <TouchableButton title={'Editar Perfil'}/>
-            <TouchableButton title={'Compartilhar Perfil'}/>
-            <Text
-            style={{
-                fontSize: 18,
-                color: 'black',
-                paddingHorizontal: 10,
-                marginTop: 10,
-                fontWeight: 'bold',
-                marginBottom: 20,
-            }}>Feed</Text>
+
+            {/* Botões lado a lado */}
+            <View style={styles.buttonContainer}>
+                <TouchableButton title={'Editar Perfil'} icon={<Icon name="create-outline" size={20} color="white" />} />
+                <TouchableButton title={'Compartilhar Perfil'} icon={<Icon name="share-outline" size={20} color="white" />} />
+            </View>
+            
             <View style={{borderWidth:StyleSheet.hairlineWidth, borderColor: 'black'}}/>
 
             {/* Adicionando as fotos abaixo do Feed */}
@@ -113,5 +108,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 10,
         marginBottom: 20,
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginLeft: 30,
     },
 });

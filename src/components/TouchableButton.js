@@ -1,43 +1,31 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 
-const TouchableButton = ({ title, onPress }) => {
+const TouchableButton = ({ title, onPress, icon }) => {
     return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-    <Text style={styles.buttonText}>{title}</Text>
-    </TouchableOpacity>
-);
+        <TouchableOpacity style={styles.button} onPress={onPress}>
+            {icon && <View style={styles.iconContainer}>{icon}</View>}
+            <Text style={styles.buttonText}>{title}</Text>
+        </TouchableOpacity>
+    );
 };
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: '#0060f6', // Cor de fundo azul do Instagram//
-        paddingVertical: 8, // Adicionando padding vertical
-        borderRadius: 25, // Reduzindo o raio da borda para ficar mais arredondado
+        backgroundColor: '#0060f6',
+        paddingVertical: 5,
+        paddingHorizontal: 30,
+        borderRadius: 20,
         alignItems: 'center',
         marginVertical: 8,
-        marginRight: 100,
-        marginLeft: 100,
+        marginRight: 25,
+        flexDirection: 'row', // Para alinhar o ícone e o texto horizontalmente
     },
-        buttonText: {
+    buttonText: {
         color: 'white',
         fontWeight: 'bold',
-        fontSize: 12, // Ajustando o tamanho da fonte
-    },
-
-    button: {
-        backgroundColor: '#0060f6', // Cor de fundo azul do Instagram//
-        paddingVertical: 8, // Adicionando padding vertical
-        borderRadius: 25, // Reduzindo o raio da borda para ficar mais arredondado
-        alignItems: 'center',
-        marginVertical: 8,
-        marginRight: 100,
-        marginLeft: 100,
-    },
-        buttonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 12, // Ajustando o tamanho da fonte
+        fontSize: 12,
+        marginLeft: 4, // Espaço entre o ícone e o texto
     },
 });
 
