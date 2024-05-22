@@ -31,7 +31,6 @@ function HomeTabs() {
           return <Icon name={iconName} size={size} color={color} />;
         },
       })}
-      // Define as opções de estilo diretamente no estilo da barra de navegação na parte inferior
       tabBarOptions={{
         activeTintColor: 'blue',
         inactiveTintColor: 'gray',

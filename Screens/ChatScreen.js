@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 
 export default function ChatScreen({ route }) {
   const { userName } = route.params;
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
+  const flatListRef = useRef(null);
 
   const sendMessage = () => {
     if (inputText.trim() !== '') {
@@ -13,6 +14,8 @@ export default function ChatScreen({ route }) {
         { id: String(prevMessages.length + 1), message: inputText },
       ]);
       setInputText('');
+      // Role automaticamente para baixo quando uma nova mensagem é enviada
+      flatListRef.current.scrollToEnd({ animated: true });
     }
   };
 
@@ -24,6 +27,7 @@ export default function ChatScreen({ route }) {
     >
       <Text style={styles.header}>{userName}</Text>
       <FlatList
+        ref={flatListRef}
         data={messages}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
@@ -32,6 +36,7 @@ export default function ChatScreen({ route }) {
           </View>
         )}
         contentContainerStyle={styles.messagesList}
+        onContentSizeChange={() => flatListRef.current.scrollToEnd({ animated: true })}
       />
       <View style={styles.inputContainer}>
         <TextInput
@@ -40,7 +45,11 @@ export default function ChatScreen({ route }) {
           onChangeText={setInputText}
           placeholder="Digite sua mensagem..."
         />
-        <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
+        <TouchableOpacity
+          onPress={sendMessage}
+          style={[styles.sendButton, !inputText.trim() && styles.disabledButton]}
+          disabled={!inputText.trim()}
+        >
           <Text style={styles.sendButtonText}>Enviar</Text>
         </TouchableOpacity>
       </View>
@@ -104,5 +113,8 @@ const styles = StyleSheet.create({
   sendButtonText: {
     color: '#fff',
     fontSize: 16,
+  },
+  disabledButton: {
+    opacity: 0.5,
   },
 });
