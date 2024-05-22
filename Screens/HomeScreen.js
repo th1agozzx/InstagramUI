@@ -115,7 +115,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* Envolve o conteúdo com um ScrollView */}
+      
       <ScrollView>
         <View style={styles.feed}>
           <FlatList

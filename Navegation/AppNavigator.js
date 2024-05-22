@@ -30,9 +30,17 @@ function HomeTabs() {
 
           return <Icon name={iconName} size={size} color={color} />;
         },
+<<<<<<< HEAD
         tabBarActiveTintColor: 'blue',
         tabBarInactiveTintColor: 'gray',
         tabBarStyle: {
+=======
+      })}
+      tabBarOptions={{
+        activeTintColor: 'blue',
+        inactiveTintColor: 'gray',
+        style: {
+>>>>>>> 672a2a84699a6c501259e03d6f3b9ac681ffeebc
           display: 'flex',
         },
       })}

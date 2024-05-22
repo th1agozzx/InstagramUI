@@ -1,32 +1,51 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
 
-const conversations = [
-  { id: '1', name: 'João' },
-  { id: '2', name: 'Maria' },
-  { id: '3', name: 'Carlos' },
-  { id: '4', name: 'Ana' },
-  { id: '5', name: 'Pedro' },
-];
+const ChatListItem = ({ name, onPress }) => (
+  <TouchableOpacity
+    style={styles.conversationContainer}
+    onPress={onPress}
+  >
+    <Text style={styles.conversationText}>{name}</Text>
+  </TouchableOpacity>
+);
 
-export default function ChatListScreen({ navigation }) {
+ChatListItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
+};
+
+const ChatListScreen = ({ navigation }) => {
+  const conversations = [
+    { id: '1', name: 'João' },
+    { id: '2', name: 'Maria' },
+    { id: '3', name: 'Carlos' },
+    { id: '4', name: 'Ana' },
+    { id: '5', name: 'Pedro' },
+  ];
+
+  const renderItem = ({ item }) => (
+    <ChatListItem
+      name={item.name}
+      onPress={() => navigation.navigate('Conversa', { userName: item.name })}
+    />
+  );
+
   return (
     <View style={styles.container}>
       <FlatList
         data={conversations}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.conversationContainer}
-            onPress={() => navigation.navigate('Conversa', { userName: item.name })}
-          >
-            <Text style={styles.conversationText}>{item.name}</Text>
-          </TouchableOpacity>
-        )}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
       />
     </View>
   );
-}
+};
+
+ChatListScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -49,3 +68,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
+
+export default ChatListScreen;
