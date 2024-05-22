@@ -15,7 +15,6 @@ export const mockPosts = [
   { id: '4', author: 'neymarjr', imageUrl: neymarPost2, likes: 20, comments: ['Top!'], liked: false },
   { id: '5', author: 'ochicoin', imageUrl: ochicoinPost2, likes: 25, comments: ['Muito bom!'], liked: false },
   { id: '6', author: 'casimiro', imageUrl: casimiroPost2, likes: 30, comments: ['Sensacional!'], liked: false },
-  { id: '7', author: 'casimiro', imageUrl: casimiroPost2, likes: 30, comments: ['Sensacional!'], liked: false },
 ];
 
 export const mockUsers = {
