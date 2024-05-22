@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, ScrollView, TouchableOpacity } from 'react-native';
 
-export default function ChatScreen({ route }) {
+
+export default function ChatScreen({ route }) 
   const { userName } = route.params;
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
@@ -106,4 +107,3 @@ const styles = StyleSheet.create({
   disabledButton: {
     opacity: 0.5,
   },
-});
