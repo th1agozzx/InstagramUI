@@ -9,7 +9,7 @@ const authenticate = async (email, password) => {
       if (email === "usuario@2024" && password === "1234") {
         resolve("Successo");
       } else {
-        reject("Emai ou senha invalidos.");
+        reject("Email ou senha invalidos.");
       }
     }, 1000);
   });
@@ -41,7 +41,7 @@ export default function LoginScreen({ navigation }) {
     setLoading(true); // Ativa o estado de carregamento
     try {
       await authenticate(email, password);
-      navigation.navigate("Home"); // Navega para a tela "Home" em caso de sucesso
+      navigation.navigate("MainHome"); // Navega para a tela "Home" em caso de sucesso
     } catch (error) {
       Alert.alert("Erro de login!", error); // Mostra um alerta em caso de erro
     } finally {

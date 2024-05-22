@@ -30,15 +30,13 @@ function HomeTabs() {
 
           return <Icon name={iconName} size={size} color={color} />;
         },
-      })}
-      // Define as opções de estilo diretamente no estilo da barra de navegação na parte inferior
-      tabBarOptions={{
-        activeTintColor: 'blue',
-        inactiveTintColor: 'gray',
-        style: {
+        tabBarActiveTintColor: 'blue',
+        tabBarInactiveTintColor: 'gray',
+        tabBarStyle: {
           display: 'flex',
         },
-      }}>
+      })}
+    >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Perfil" component={MeuPerfil} />
       <Tab.Screen name="Minhas Conversas" component={ChatListScreen} />
@@ -51,7 +49,7 @@ export default function AppNavigator() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Home" component={HomeTabs} />
+        <Stack.Screen name="MainHome" component={HomeTabs} />
         <Stack.Screen name="Conversa" component={ChatScreen} />
         <Stack.Screen name="UserDetails" component={UserDetailsScreen} />
       </Stack.Navigator>

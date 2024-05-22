@@ -1,49 +1,43 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, ScrollView, TouchableOpacity } from 'react-native';
 
 export default function ChatScreen({ route }) {
   const { userName } = route.params;
+  const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
-  const [inputText, setInputText] = useState('');
 
   const sendMessage = () => {
-    if (inputText.trim() !== '') {
-      setMessages(prevMessages => [
-        ...prevMessages,
-        { id: String(prevMessages.length + 1), message: inputText },
-      ]);
-      setInputText('');
-    }
+    console.log('Mensagem enviada:', message);
+    setMessages([...messages, message]);
+    setMessage('');
   };
 
   return (
     <KeyboardAvoidingView
-      style={styles.container}
+      style={{ flex: 1 }}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={90}
     >
-      <Text style={styles.header}>{userName}</Text>
-      <FlatList
-        data={messages}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.messageContainer}>
-            <Text style={styles.messageText}>{item.message}</Text>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <Text style={styles.header}>{userName}</Text>
+          <ScrollView style={styles.messageContainer}>
+            {messages.map((msg, index) => (
+              <Text key={index} style={styles.message}>{msg}</Text>
+            ))}
+          </ScrollView>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Digite sua mensagem..."
+              value={message}
+              onChangeText={setMessage}
+            />
+            <TouchableOpacity style={styles.sendButton} onPress={sendMessage}>
+              <Text style={styles.sendButtonText}>Enviar</Text>
+            </TouchableOpacity>
           </View>
-        )}
-        contentContainerStyle={styles.messagesList}
-      />
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          value={inputText}
-          onChangeText={setInputText}
-          placeholder="Digite sua mensagem..."
-        />
-        <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
-          <Text style={styles.sendButtonText}>Enviar</Text>
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
 }
@@ -51,58 +45,58 @@ export default function ChatScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#ccc',
   },
   header: {
-    fontSize: 24,
+    backgroundColor: "#007bff",
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+    fontSize: 20,
     fontWeight: 'bold',
-    padding: 15,
-    backgroundColor: '#007bff',
-    color: '#fff',
-    textAlign: 'center',
-  },
-  messagesList: {
-    padding: 10,
   },
   messageContainer: {
-    padding: 15,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    marginVertical: 5,
-    alignSelf: 'flex-start',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 3,
-    maxWidth: '80%',
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
   },
-  messageText: {
-    fontSize: 16,
+  message: {
+    backgroundColor: '#007bff',
+    color: '#fff',
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    marginBottom: 10,
+    borderRadius: 10,
+    maxWidth: '80%',
+    alignSelf: 'flex-end',
   },
   inputContainer: {
     flexDirection: 'row',
-    padding: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     borderTopWidth: 1,
-    borderTopColor: '#ddd',
-    backgroundColor: '#fff',
+    borderTopColor: 'black',
+    backgroundColor: '#ddd',
   },
   input: {
     flex: 1,
-    padding: 10,
-    backgroundColor: '#f1f1f1',
+    borderColor: '#ccc',
+    borderWidth: 1,
     borderRadius: 20,
+    fontWeight: 'bold',
+    paddingHorizontal: 15,
     marginRight: 10,
   },
   sendButton: {
     backgroundColor: '#007bff',
-    borderRadius: 20,
-    justifyContent: 'center',
     paddingHorizontal: 20,
     paddingVertical: 10,
+    borderRadius: 20,
   },
   sendButtonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 15,
+    fontWeight: 'bold',
   },
 });
