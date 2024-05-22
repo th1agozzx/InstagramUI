@@ -1,22 +1,18 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, ScrollView, TouchableOpacity } from 'react-native';
-=======
 import React, { useState, useRef } from 'react';
 import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
->>>>>>> 672a2a84699a6c501259e03d6f3b9ac681ffeebc
 
-export default function ChatScreen({ route }) {
+
+export default function ChatScreen({ route }) 
   const { userName } = route.params;
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
-<<<<<<< HEAD
-
   const sendMessage = () => {
     console.log('Mensagem enviada:', message);
     setMessages([...messages, message]);
     setMessage('');
-=======
+
   const [inputText, setInputText] = useState('');
   const flatListRef = useRef(null);
 
@@ -30,7 +26,6 @@ export default function ChatScreen({ route }) {
       // Role automaticamente para baixo quando uma nova mensagem é enviada
       flatListRef.current.scrollToEnd({ animated: true });
     }
->>>>>>> 672a2a84699a6c501259e03d6f3b9ac681ffeebc
   };
 
   return (
@@ -38,7 +33,6 @@ export default function ChatScreen({ route }) {
       style={{ flex: 1 }}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-<<<<<<< HEAD
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <Text style={styles.header}>{userName}</Text>
@@ -60,7 +54,6 @@ export default function ChatScreen({ route }) {
           </View>
         </View>
       </TouchableWithoutFeedback>
-=======
       <Text style={styles.header}>{userName}</Text>
       <FlatList
         ref={flatListRef}
@@ -89,7 +82,6 @@ export default function ChatScreen({ route }) {
           <Text style={styles.sendButtonText}>Enviar</Text>
         </TouchableOpacity>
       </View>
->>>>>>> 672a2a84699a6c501259e03d6f3b9ac681ffeebc
     </KeyboardAvoidingView>
   );
 }
@@ -154,4 +146,3 @@ const styles = StyleSheet.create({
   disabledButton: {
     opacity: 0.5,
   },
-});
