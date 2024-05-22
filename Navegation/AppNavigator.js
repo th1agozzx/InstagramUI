@@ -1,14 +1,14 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import LoginScreen from '../Screens/LoginScreen';
-import HomeScreen from '../Screens/HomeScreen';
-import ChatListScreen from '../Screens/ChatListScreen';
-import ChatScreen from '../Screens/ChatScreen';
-import MeuPerfil from '../Screens/MeuPerfil';
-import UserDetailsScreen from '../Screens/UserDetailsScreen';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import LoginScreen from "../Screens/LoginScreen";
+import HomeScreen from "../Screens/HomeScreen";
+import ChatListScreen from "../Screens/ChatListScreen";
+import ChatScreen from "../Screens/ChatScreen";
+import MeuPerfil from "../Screens/MeuPerfil";
+import UserDetailsScreen from "../Screens/UserDetailsScreen";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -20,28 +20,20 @@ function HomeTabs() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === 'Home') {
-            iconName = focused ? 'home' : 'home';
-          } else if (route.name === 'Perfil') {
-            iconName = focused ? 'user' : 'user-o';
-          } else if (route.name === 'Minhas Conversas') {
-            iconName = focused ? 'comments' : 'comments-o';
+          if (route.name === "Home") {
+            iconName = focused ? "home" : "home";
+          } else if (route.name === "Perfil") {
+            iconName = focused ? "user" : "user-o";
+          } else if (route.name === "Minhas Conversas") {
+            iconName = focused ? "comments" : "comments-o";
           }
 
           return <Icon name={iconName} size={size} color={color} />;
         },
-<<<<<<< HEAD
-        tabBarActiveTintColor: 'blue',
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: "blue",
+        tabBarInactiveTintColor: "gray",
         tabBarStyle: {
-=======
-      })}
-      tabBarOptions={{
-        activeTintColor: 'blue',
-        inactiveTintColor: 'gray',
-        style: {
->>>>>>> 672a2a84699a6c501259e03d6f3b9ac681ffeebc
-          display: 'flex',
+          display: "flex",
         },
       })}
     >

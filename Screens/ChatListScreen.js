@@ -1,12 +1,15 @@
-import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import PropTypes from 'prop-types';
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
+import PropTypes from "prop-types";
 
 const ChatListItem = ({ name, onPress }) => (
-  <TouchableOpacity
-    style={styles.conversationContainer}
-    onPress={onPress}
-  >
+  <TouchableOpacity style={styles.conversationContainer} onPress={onPress}>
     <Text style={styles.conversationText}>{name}</Text>
   </TouchableOpacity>
 );
@@ -18,17 +21,17 @@ ChatListItem.propTypes = {
 
 const ChatListScreen = ({ navigation }) => {
   const conversations = [
-    { id: '1', name: 'João' },
-    { id: '2', name: 'Maria' },
-    { id: '3', name: 'Carlos' },
-    { id: '4', name: 'Ana' },
-    { id: '5', name: 'Pedro' },
+    { id: "1", name: "João" },
+    { id: "2", name: "Maria" },
+    { id: "3", name: "Carlos" },
+    { id: "4", name: "Ana" },
+    { id: "5", name: "Pedro" },
   ];
 
   const renderItem = ({ item }) => (
     <ChatListItem
       name={item.name}
-      onPress={() => navigation.navigate('Conversa', { userName: item.name })}
+      onPress={() => navigation.navigate("Conversa", { userName: item.name })}
     />
   );
 
@@ -50,15 +53,15 @@ ChatListScreen.propTypes = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: "#f9f9f9",
     padding: 10,
   },
   conversationContainer: {
     padding: 15,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: 5,
     marginVertical: 5,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
