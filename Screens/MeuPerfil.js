@@ -9,11 +9,11 @@ const MeuPerfil = (props) => {
             <View style={styles.headerContainer}>
                 <Image 
                     style={styles.profileImage}
-                    source={require('../assets/image/Logo1.png')} 
+                    source={require('../assets/image/iconeperfil.png')} 
                 />
                 <View style={styles.infoContainer}>
                     <View style={styles.infoBlock}>
-                        <Text style={styles.infoNumber}>157</Text>
+                        <Text style={styles.infoNumber}>3</Text>
                         <Text style={styles.infoLabel}>publicações</Text>
                     </View>
                     <View style={styles.infoBlock}>
@@ -21,7 +21,7 @@ const MeuPerfil = (props) => {
                         <Text style={styles.infoLabel}>seguidores</Text>
                     </View>
                     <View style={styles.infoBlock}>
-                        <Text style={styles.infoNumber}>3</Text>
+                        <Text style={styles.infoNumber}>157</Text>
                         <Text style={styles.infoLabel}>seguindo</Text>
                     </View>
                 </View>
@@ -41,15 +41,15 @@ const MeuPerfil = (props) => {
             <ScrollView horizontal={true} style={styles.photoContainer}>
                 <Image 
                     style={styles.headerImage}
-                    source={require('../assets/image/photo1.png')} 
+                    source={require('../assets/image/foto2.png')} 
                 />
                 <Image 
                     style={styles.headerImage}
-                    source={require('../assets/image/photo1.png')} 
+                    source={require('../assets/image/foto3.png')} 
                 />
                 <Image 
                     style={styles.headerImage}
-                    source={require('../assets/image/photo1.png')} 
+                    source={require('../assets/image/foto1.png')} 
                 />
             </ScrollView>
         </View>
@@ -66,15 +66,16 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
     headerImage:{
-        width: 120,
+        width: 122,
         height: 120,
-        marginHorizontal: 5.6,
+        marginHorizontal: 1,
         marginTop: 4,
+        marginRight: 10,
     },
 
     profileImage: {
-        height: 60,
-        width: 60,
+        height: 70,
+        width: 70,
         backgroundColor: 'grey',
         borderRadius: 50,
     },
