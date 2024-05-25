@@ -62,19 +62,19 @@ export const mockPosts = [
 export const mockUsers = {
   neymarjr: {
     name: "neymarjr",
-    bio: "Bio of neymarjr",
+    bio: "⚽️ Astro do futebol e ícone global. Driblando desafios dentro e fora dos campos. Bem-vindo ao meu mundo!",
     avatarUrl: neymarjrImage,
     posts: [mockPosts[0], mockPosts[3]],
   },
   ochicoin: {
     name: "ochicoin",
-    bio: "Bio of ochicoin",
+    bio: "🚀 Explorador do universo cripto. Decifrando o futuro das finanças, uma moeda digital por vez.",
     avatarUrl: ochicoinImage,
     posts: [mockPosts[1], mockPosts[4]],
   },
   casimiro: {
     name: "casimiro",
-    bio: "Bio of casimiro",
+    bio: "🎥 Rei das lives e contador de histórias. Venha rir e se divertir com minhas aventuras diárias!",
     avatarUrl: casimiroImage,
     posts: [mockPosts[2], mockPosts[5]],
   },

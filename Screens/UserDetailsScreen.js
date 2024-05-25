@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, FlatList, Dimensions } from 'react-native';
 
-const screenWidth = Dimensions.get('window').width;
+const { width: screenWidth } = Dimensions.get('window');
 
 export default function UserDetailsScreen({ route }) {
   const { user } = route.params;
@@ -17,12 +17,12 @@ export default function UserDetailsScreen({ route }) {
       </View>
       <FlatList
         data={user.posts}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <Image source={item.imageUrl} style={styles.postImage} />
         )}
         numColumns={3}
-        style={styles.postsContainer}
+        contentContainerStyle={styles.postsContainer}
       />
     </View>
   );
@@ -31,14 +31,14 @@ export default function UserDetailsScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
   },
   profileHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    borderBottomColor: '#dddddd',
   },
   avatar: {
     width: 80,
@@ -56,15 +56,15 @@ const styles = StyleSheet.create({
   },
   bio: {
     fontSize: 14,
-    color: '#666',
+    color: '#666666',
     marginTop: 5,
   },
   postsContainer: {
-    marginTop: 10,
+    padding: 10,
   },
   postImage: {
-    width: screenWidth / 3,
-    height: screenWidth / 3,
+    width: screenWidth / 3 - 2,
+    height: screenWidth / 3 - 2,
     margin: 1,
   },
 });
