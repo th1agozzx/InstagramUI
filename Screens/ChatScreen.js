@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, ScrollView, TouchableOpacity } from 'react-native';
 
 export default function ChatScreen({ route }) {
   const { userName } = route.params;
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
+  const flatListRef = useRef(null);
 
   const sendMessage = () => {
     console.log('Mensagem enviada:', message);
     setMessages([...messages, message]);
     setMessage('');
-    
-  const [inputText, setInputText] = useState('');
-  const flatListRef = useRef(null);
-
-   };
+  };
 
   return (
     <KeyboardAvoidingView
