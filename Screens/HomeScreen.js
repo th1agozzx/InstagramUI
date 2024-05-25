@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity, Keyboard, TextInput, Dimensions, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Keyboard, TextInput, Dimensions, FlatList } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { mockPosts, mockUsers } from '../data/mockData';
 
@@ -115,16 +115,12 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      
-      <ScrollView>
-        <View style={styles.feed}>
-          <FlatList
-            data={posts}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id.toString()}
-          />
-        </View>
-      </ScrollView>
+      <FlatList
+        data={posts}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={styles.feed}
+      />
     </View>
   );
 }
@@ -134,7 +130,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   feed: {
-    flex: 1,
+    padding: 10,
   },
   post: {
     marginBottom: 20,
@@ -143,7 +139,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
-    paddingHorizontal: 10,
   },
   avatar: {
     width: 30,
@@ -155,14 +150,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   postImage: {
-    width: screenWidth,
-    height: screenWidth, // Mantém a proporção 1:1
+    width: screenWidth - 20,
+    height: screenWidth - 20, // Mantém a proporção 1:1
   },
   actions: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 15,
     alignItems: 'center',
+    paddingHorizontal: 15,
   },
   icon: {
     marginLeft: 20,
