@@ -13,7 +13,7 @@ const MeuPerfil = (props) => {
                 />
                 <View style={styles.infoContainer}>
                     <View style={styles.infoBlock}>
-                        <Text style={styles.infoNumber}>0</Text>
+                        <Text style={styles.infoNumber}>157</Text>
                         <Text style={styles.infoLabel}>publicações</Text>
                     </View>
                     <View style={styles.infoBlock}>
@@ -21,7 +21,7 @@ const MeuPerfil = (props) => {
                         <Text style={styles.infoLabel}>seguidores</Text>
                     </View>
                     <View style={styles.infoBlock}>
-                        <Text style={styles.infoNumber}>0</Text>
+                        <Text style={styles.infoNumber}>3</Text>
                         <Text style={styles.infoLabel}>seguindo</Text>
                     </View>
                 </View>
@@ -29,7 +29,7 @@ const MeuPerfil = (props) => {
 
             <Text style={styles.username}>Robinho</Text>
 
-            {/* Botões lado a lado */}
+            {/*Botões do perfil*/}
             <View style={styles.buttonContainer}>
                 <TouchableButton title={'Editar Perfil'} icon={<Icon name="create-outline" size={20} color="white" />} />
                 <TouchableButton title={'Compartilhar Perfil'} icon={<Icon name="share-outline" size={20} color="white" />} />
