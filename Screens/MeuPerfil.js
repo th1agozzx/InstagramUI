@@ -1,16 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 import TouchableButton from '../src/components/TouchableButton';
-import Icon from 'react-native-vector-icons/Ionicons'; // Importe o ícone necessário
+import Icon from 'react-native-vector-icons/Ionicons'; // Importa os ícones necessários
 
 const MeuPerfil = (props) => {
     return (
         <View>
+            {/* Aqui fica o cabeçalho do perfil contendo uma imagem do perfil e informações do usuário */}
             <View style={styles.headerContainer}>
                 <Image 
                     style={styles.profileImage}
                     source={require('../assets/image/iconeperfil.png')} 
                 />
+
+                 {/* Aqui temos as informações de publicações, seguidores e seguindo */}
                 <View style={styles.infoContainer}>
                     <View style={styles.infoBlock}>
                         <Text style={styles.infoNumber}>3</Text>
@@ -26,18 +29,19 @@ const MeuPerfil = (props) => {
                     </View>
                 </View>
             </View>
-
+               {/* O Nome do usuário */}
             <Text style={styles.username}>Robinho</Text>
 
-            {/*Botões do perfil*/}
+            {/*Os Botões do perfil estão aqui*/}
             <View style={styles.buttonContainer}>
                 <TouchableButton title={'Editar Perfil'} icon={<Icon name="create-outline" size={20} color="white" />} />
                 <TouchableButton title={'Compartilhar Perfil'} icon={<Icon name="share-outline" size={20} color="white" />} />
             </View>
             
+             {/* Aqui é uma linha que separa as fotos */}
             <View style={{borderWidth:StyleSheet.hairlineWidth, borderColor: 'black'}}/>
 
-            {/* Adicionando as fotos abaixo do Feed */}
+            {/* Fotos de demonstração na pagina*/}
             <ScrollView horizontal={true} style={styles.photoContainer}>
                 <Image 
                     style={styles.headerImage}
@@ -55,7 +59,7 @@ const MeuPerfil = (props) => {
         </View>
     );
 };
-
+{/* Exporta o componente 'MeuPerfil' em AppNavigator*/}
 export default MeuPerfil;
 
 const styles = StyleSheet.create({
