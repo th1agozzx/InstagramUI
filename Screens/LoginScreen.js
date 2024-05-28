@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, TextInput, Button, Image, Text, StyleSheet, Alert, TouchableOpacity } from "react-native";
 import Animated, { Easing, useSharedValue, useAnimatedStyle, withTiming } from "react-native-reanimated";
 
-// Função de autenticação
+
 const authenticate = async (email, password) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -16,12 +16,11 @@ const authenticate = async (email, password) => {
 };
 
 export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState(""); // Estado para o email
-  const [password, setPassword] = useState(""); // Estado para a senha
-  const [loading, setLoading] = useState(false); // Estado para o carregamento
-  const opacity = useSharedValue(0); // Valor compartilhado para animação
+  const [email, setEmail] = useState(""); 
+  const [password, setPassword] = useState(""); 
+  const [loading, setLoading] = useState(false); 
+  const opacity = useSharedValue(0);
 
-  // Efeito para animar a opacidade na montagem do componente
   useEffect(() => {
     opacity.value = withTiming(1, {
       duration: 2000,
@@ -29,23 +28,22 @@ export default function LoginScreen({ navigation }) {
     });
   }, []);
 
-  // Estilo animado para a View
+ 
   const animatedStyle = useAnimatedStyle(() => {
     return {
       opacity: opacity.value,
     };
   });
 
-  // Função para lidar com o login
   const handleLogin = async () => {
-    setLoading(true); // Ativa o estado de carregamento
+    setLoading(true); 
     try {
       await authenticate(email, password);
-      navigation.navigate("MainHome"); // Navega para a tela "Home" em caso de sucesso
+      navigation.navigate("MainHome");
     } catch (error) {
-      Alert.alert("Erro de login!", error); // Mostra um alerta em caso de erro
+      Alert.alert("Erro de login!", error);
     } finally {
-      setLoading(false); // Desativa o estado de carregamento
+      setLoading(false);
     }
   };
 
@@ -84,7 +82,7 @@ export default function LoginScreen({ navigation }) {
   );
 }
 
-// Estilos
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
