@@ -47,12 +47,12 @@ function HomeTabs() {
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="MainHome" component={HomeTabs} />
-        <Stack.Screen name="Conversa" component={ChatScreen} />
-        <Stack.Screen name="UserDetails" component={UserDetailsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="Login" component={LoginScreen} />
+    <Stack.Screen name="MainHome" component={HomeTabs} /> 
+    <Stack.Screen name="Conversa" component={ChatScreen} /> 
+    <Stack.Screen name="UserDetails" component={UserDetailsScreen} /> 
+  </Stack.Navigator>
+</NavigationContainer>
   );
 }
